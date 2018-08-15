@@ -1,0 +1,10 @@
+{
+  "id": "zeropoint",
+  "name": "Zero Point",
+  "authors": [
+    "b0undarybreaker"
+  ],
+  "listeners": [
+    "space.bbkr.zeropoint.ZeroPoint"
+  ]
+}

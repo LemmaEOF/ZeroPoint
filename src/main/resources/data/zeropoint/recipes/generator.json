@@ -1,0 +1,23 @@
+{
+  "type": "crafting_shaped",
+  "pattern": [
+    "iii",
+    "crc",
+    "ccc"
+  ],
+  "key": {
+    "i": {
+      "item": "minecraft:iron_ingot"
+    },
+    "r": {
+      "item": "minecraft:redstone"
+    },
+    "c": {
+      "item": "minecraft:cobblestone"
+    }
+  },
+  "result": {
+    "item": "zeropoint:generator",
+    "count": 1
+  }
+}
