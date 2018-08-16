@@ -3,6 +3,8 @@ package space.bbkr.zeropoint;
         import net.minecraft.block.Block;
         import net.minecraft.block.ITileEntityProvider;
         import net.minecraft.block.state.IBlockState;
+        import net.minecraft.client.resources.I18n;
+        import net.minecraft.client.util.ITooltipFlag;
         import net.minecraft.entity.player.EntityPlayer;
         import net.minecraft.item.ItemStack;
         import net.minecraft.tileentity.TileEntity;
@@ -10,9 +12,14 @@ package space.bbkr.zeropoint;
         import net.minecraft.util.EnumFacing;
         import net.minecraft.util.EnumHand;
         import net.minecraft.util.math.BlockPos;
+        import net.minecraft.util.text.ITextComponent;
         import net.minecraft.util.text.TextComponentString;
+        import net.minecraft.util.text.TextComponentTranslation;
         import net.minecraft.world.IBlockReader;
         import net.minecraft.world.World;
+
+        import javax.annotation.Nullable;
+        import java.util.List;
 
 public class BlockGenerator extends Block implements ITileEntityProvider {
 
@@ -47,10 +54,15 @@ public class BlockGenerator extends Block implements ITileEntityProvider {
                     return true;
                 }
             } else {
-                player.sendStatusMessage(new TextComponentString("" + te.getEnergyStorage().getEnergyStored() + "/60000 ZP"), true);
+                player.sendStatusMessage(new TextComponentTranslation("msg.zeropoint.energy"), true);
                 return true;
             }
         }
         return true;
+    }
+
+    @Override
+    public void addInformation(ItemStack stack, @Nullable IBlockReader world, List<ITextComponent> tooltip, ITooltipFlag flag) {
+        tooltip.add(new TextComponentTranslation("tooltip.zeropoint.generator"));
     }
 }

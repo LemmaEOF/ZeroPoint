@@ -23,7 +23,7 @@ public class TileEntityGenerator extends TileEntity implements IEnergyHandler, I
     public TileEntityGenerator(TileEntityType<?> type) {
         super(type);
         this.stack = ItemStack.EMPTY;
-        this.energy = new EnergyStorage(64000, 30, 320);
+        this.energy = new EnergyStorage(64000, 30, 300);
         this.fuelTime = 0;
     }
 
@@ -33,7 +33,7 @@ public class TileEntityGenerator extends TileEntity implements IEnergyHandler, I
 
     public void update() {
         if (consumeFuel()) energy.insert(30, ActionType.EXECUTE);
-
+        if (energy.getEnergyStored() > 0) transferEnergy();
         markDirty();
     }
 
@@ -43,10 +43,22 @@ public class TileEntityGenerator extends TileEntity implements IEnergyHandler, I
             if (stack.isEmpty() || !TileEntityFurnace.isItemFuel(stack)) return false;
             fuelTime = TileEntityFurnace.getBurnTimes().get(stack.getItem());
             stack.shrink(1);
-            return true;
-        } else {
-            fuelTime--;
-            return true;
+        }
+        fuelTime--;
+        return true;
+    }
+
+    public void transferEnergy() {
+        for (EnumFacing face : EnumFacing.values()) {
+            TileEntity tile = world.getTileEntity(pos.offset(face));
+            if (tile instanceof IEnergyHandler) {
+                IEnergyHandler energyHandler = (IEnergyHandler)tile;
+                if (energyHandler.canTransfer(face.getOpposite(), EnergyDirection.INWARDS)) {
+                    int sendTest = energy.extract(300, ActionType.SIMULATE);
+                    int sendReal = energyHandler.getEnergyStorage().insert(sendTest, ActionType.EXECUTE);
+                    energy.extract(sendReal, ActionType.EXECUTE);
+                }
+            }
         }
     }
 

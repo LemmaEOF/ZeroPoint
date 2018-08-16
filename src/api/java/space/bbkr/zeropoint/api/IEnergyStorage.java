@@ -18,7 +18,7 @@ public interface IEnergyStorage {
      * Set to 0 on OUTWARDS for consume-only, set to 0 on INWARDS for produce-only
      * @param direction The direction energy is flowing
      * @return The transfer rate in energy per second
-     * For scale, the example generator generates at 30 ZP/t (unexposed 30 ZP/t inward) and transfers 320 ZP/t outward
+     * For scale, the example generator generates at 30 ZP/t (unexposed 30 ZP/t inward) and transfers 300 ZP/t outward
      * ALWAYS EXPOSE TO THE USER AS ENERGY PER SECOND.
      */
     int getTransferRate(EnergyDirection direction);

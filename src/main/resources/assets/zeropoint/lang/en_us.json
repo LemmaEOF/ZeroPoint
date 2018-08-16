@@ -1,4 +1,5 @@
 {
-  "block.riftfluids.tank": "Glass Tank",
-  "zeropoint.msg.energy": "Currently stored: %s"
+  "block.zeropoint.generator": "Basic Generator",
+  "tooltip.zeropoint.generator": "§7Rough reference implementation",
+  "zeropoint.msg.energy": "Currently stored: %s/64000 ZP"
 }

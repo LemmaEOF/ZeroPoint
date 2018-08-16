@@ -1,6 +1,7 @@
 {
-  "parent": "block/cube_all",
+  "parent": "block/cube_column",
   "textures": {
-    "all": "zeropoint:block/generator_dev"
+    "side": "zeropoint:block/generator_side",
+    "end": "minecraft:block/furnace_top"
   }
 }
