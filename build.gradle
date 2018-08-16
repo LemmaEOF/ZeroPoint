@@ -32,7 +32,11 @@ sourceSets {
     main {
         resources {
             srcDirs += 'lang'
-            srcDirs += 'docs'
+        }
+    }
+    api {
+        resources {
+
         }
     }
 }
@@ -44,9 +48,32 @@ minecraft {
     tweakClass = 'org.dimdev.riftloader.launch.RiftLoaderTweaker'
 }
 
-task apiJar(type: Jar, dependsOn: 'sourceMainJava') {
-    from sourceSets.main.allSource
+jar {
+    from "LICENSE"
+    from sourceSets.api.output
     from sourceSets.main.output
-    include 'space/bbkr/zeropoint/api/*'
-    classifier = 'api'
+    classifier '' //this is the main jar!
+}
+
+sourceJar {
+    from "LICENSE"
+    classifier 'sources'
+}
+
+task lightJar(type: Jar) {
+    from "LICENSE"
+    from sourceSets.main.output
+    classifier 'light'
+}
+
+task apiJar(type: Jar) {
+    from sourceSets.api.allJava
+    from sourceSets.api.output
+    classifier 'api'
+}
+
+artifacts {
+    archives apiJar
+    archives sourceJar
+    archives lightJar
 }

@@ -19,7 +19,6 @@ public class TileEntityGenerator extends TileEntity implements IEnergyHandler, I
     private EnergyStorage energy;
     private ItemStack stack;
     private int fuelTime;
-    private int maxFuelTime;
 
     public TileEntityGenerator(TileEntityType<?> type) {
         super(type);
