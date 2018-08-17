@@ -50,9 +50,16 @@ minecraft {
 
 jar {
     from "LICENSE"
-    from sourceSets.api.output
     from sourceSets.main.output
+    from sourceSets.api.output
     classifier '' //this is the main jar!
+}
+
+task devJar(type: Jar, dependsOn: classes) {
+    from "LICENSE"
+    from sourceSets.main.output
+    from sourceSets.api.output
+    classifier 'dev'
 }
 
 sourceJar {
@@ -76,4 +83,5 @@ artifacts {
     archives apiJar
     archives sourceJar
     archives lightJar
+    archives devJar
 }
