@@ -101,7 +101,7 @@ public class TileEntityGenerator extends TileEntity implements IEnergyHandler, I
     @Override
     public void readFromNBT(NBTTagCompound compound) {
         super.readFromNBT(compound);
-        stack = ItemStack.func_199557_a(compound.getCompoundTag("Inv"));
+        stack = ItemStack.loadFromNBT(compound.getCompoundTag("Inv"));
         energy.readFromNBT(compound.getCompoundTag("Energy"));
     }
 

@@ -15,13 +15,13 @@ import org.dimdev.rift.listener.TileEntityTypeAdder;
 
 public class ZeroPoint implements BlockAdder, ItemAdder, TileEntityTypeAdder {
 
-    public static final BlockGenerator GENERATOR = new BlockGenerator(Block.Builder.create(Material.ROCK, MapColor.STONE).hardnessAndResistance(2f, 3f).soundType(SoundType.METAL));
+    public static final BlockGenerator GENERATOR = new BlockGenerator(Block.Builder.create(Material.ROCK, MapColor.STONE).hardnessAndResistance(2f, 3f).sound(SoundType.METAL));
 
     public static TileEntityType<TileEntityGenerator> GENERATOR_TE;
 
     @Override
     public void registerBlocks() {
-        Block.registerBlock(new ResourceLocation("zeropoint:generator"), GENERATOR);
+        Block.register(new ResourceLocation("zeropoint:generator"), GENERATOR);
     }
 
     @Override

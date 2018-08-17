@@ -34,12 +34,12 @@ public class BlockGenerator extends Block implements ITileEntityProvider {
     }
 
     @Override
-    public TileEntity getTileEntity(IBlockReader world) {
+    public TileEntity createNewTileEntity(IBlockReader world) {
         return new TileEntityGenerator();
     }
 
     @Override
-    public boolean onRightClick(IBlockState state, World world, BlockPos pos, EntityPlayer player, EnumHand hand, EnumFacing facing, float x, float y, float z) {
+    public boolean onBlockActivated(IBlockState state, World world, BlockPos pos, EntityPlayer player, EnumHand hand, EnumFacing facing, float x, float y, float z) {
         if (world == null || world.isRemote() || player == null || hand == EnumHand.OFF_HAND) return true;
         TileEntity tile = world.getTileEntity(pos);
         if ((tile instanceof TileEntityGenerator)) {
