@@ -38,8 +38,8 @@ public class EnergyStorage implements IEnergyStorage {
     }
 
     @Override
-    public int getTransferRate(EnergyDirection direction) {
-        if (direction == EnergyDirection.INWARDS) return maxEnergyInsert;
+    public int getTransferRate(TransferDirection direction) {
+        if (direction == TransferDirection.OPPOSITE) return maxEnergyInsert;
         else return maxEnergyExtract;
     }
 

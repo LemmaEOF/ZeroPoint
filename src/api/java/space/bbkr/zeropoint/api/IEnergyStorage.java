@@ -9,7 +9,7 @@ public interface IEnergyStorage {
 
     /**
      * @return The maximum energy that can be stored
-     * For scale, the example generator can store 64,000 ZP and generates 48,000 ZP per coal
+     * For scale, the example generator can store 16,000 ZP and generates 16,000 ZP per coal
      */
     int getEnergyCapacity();
 
@@ -18,10 +18,10 @@ public interface IEnergyStorage {
      * Set to 0 on OUTWARDS for consume-only, set to 0 on INWARDS for produce-only
      * @param direction The direction energy is flowing
      * @return The transfer rate in energy per tick
-     * For scale, the example generator generates at 30 ZP/t (unexposed 30 ZP/t inward) and transfers 300 ZP/t outward
-     * ALWAYS EXPOSE TO THE USER AS ENERGY PER SECOND.
+     * For scale, the example generator generates at 10 ZP/t (unexposed 10 ZP/t inward) and transfers 100 ZP/t outward
+     * **ALWAYS EXPOSE TO THE USER AS ENERGY PER SECOND.**
      */
-    int getTransferRate(EnergyDirection direction);
+    int getTransferRate(TransferDirection direction);
 
     /**
      * @param maxInsert The maximum amount of energy to insert

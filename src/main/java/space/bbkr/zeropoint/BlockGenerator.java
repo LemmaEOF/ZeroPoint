@@ -3,7 +3,6 @@ package space.bbkr.zeropoint;
         import net.minecraft.block.Block;
         import net.minecraft.block.ITileEntityProvider;
         import net.minecraft.block.state.IBlockState;
-        import net.minecraft.client.resources.I18n;
         import net.minecraft.client.util.ITooltipFlag;
         import net.minecraft.entity.player.EntityPlayer;
         import net.minecraft.item.ItemStack;
@@ -13,7 +12,6 @@ package space.bbkr.zeropoint;
         import net.minecraft.util.EnumHand;
         import net.minecraft.util.math.BlockPos;
         import net.minecraft.util.text.ITextComponent;
-        import net.minecraft.util.text.TextComponentString;
         import net.minecraft.util.text.TextComponentTranslation;
         import net.minecraft.world.IBlockReader;
         import net.minecraft.world.World;
@@ -22,7 +20,6 @@ package space.bbkr.zeropoint;
         import java.util.List;
 
 public class BlockGenerator extends Block implements ITileEntityProvider {
-
 
     public BlockGenerator(Builder builder) {
         super(builder);

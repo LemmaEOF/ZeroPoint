@@ -11,7 +11,7 @@ import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
 import space.bbkr.zeropoint.api.ActionType;
-import space.bbkr.zeropoint.api.EnergyDirection;
+import space.bbkr.zeropoint.api.TransferDirection;
 import space.bbkr.zeropoint.api.EnergyStorage;
 import space.bbkr.zeropoint.api.IEnergyHandler;
 
@@ -23,7 +23,7 @@ public class TileEntityGenerator extends TileEntity implements IEnergyHandler, I
     public TileEntityGenerator(TileEntityType<?> type) {
         super(type);
         this.stack = ItemStack.EMPTY;
-        this.energy = new EnergyStorage(64000, 30, 300);
+        this.energy = new EnergyStorage(16000, 10, 100);
         this.fuelTime = 0;
     }
 
@@ -32,13 +32,13 @@ public class TileEntityGenerator extends TileEntity implements IEnergyHandler, I
     }
 
     public void update() {
-        if (consumeFuel()) energy.insert(30, ActionType.EXECUTE);
+        if (consumeFuel()) energy.insert(10, ActionType.EXECUTE);
         if (energy.getEnergyStored() > 0) transferEnergy();
         markDirty();
     }
 
     public boolean consumeFuel() {
-        if ((energy.insert(30, ActionType.SIMULATE) == 0)) return false;
+        if ((energy.insert(10, ActionType.SIMULATE) == 0)) return false;
         if (fuelTime <= 0) {
             if (stack.isEmpty() || !TileEntityFurnace.isItemFuel(stack)) return false;
             fuelTime = TileEntityFurnace.getBurnTimes().get(stack.getItem());
@@ -53,8 +53,8 @@ public class TileEntityGenerator extends TileEntity implements IEnergyHandler, I
             TileEntity tile = world.getTileEntity(pos.offset(face));
             if (tile instanceof IEnergyHandler) {
                 IEnergyHandler energyHandler = (IEnergyHandler)tile;
-                if (energyHandler.canTransfer(face.getOpposite(), EnergyDirection.INWARDS)) {
-                    int sendTest = energy.extract(300, ActionType.SIMULATE);
+                if (energyHandler.canTransfer(face.getOpposite(), TransferDirection.OPPOSITE)) {
+                    int sendTest = energy.extract(100, ActionType.SIMULATE);
                     int sendReal = energyHandler.getEnergyStorage().insert(sendTest, ActionType.EXECUTE);
                     energy.extract(sendReal, ActionType.EXECUTE);
                 }
@@ -80,8 +80,8 @@ public class TileEntityGenerator extends TileEntity implements IEnergyHandler, I
     }
 
     @Override
-    public boolean canTransfer(EnumFacing facing, EnergyDirection direction) {
-        return direction == EnergyDirection.OUTWARDS;
+    public boolean canTransfer(EnumFacing facing, TransferDirection direction) {
+        return direction == TransferDirection.MATCH;
     }
 
     @Override

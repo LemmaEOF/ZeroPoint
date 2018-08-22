@@ -8,7 +8,7 @@ public interface IEnergyHandler {
      * @param direction The direction energy is moving from your frame of reference
      * @return Whether energy can go that direction on that face
      */
-    public boolean canTransfer(EnumFacing facing, EnergyDirection direction);
+    public boolean canTransfer(EnumFacing facing, TransferDirection direction);
 
     /**
      * @return the EnergyStorage for your block
