@@ -1,5 +1,7 @@
 package space.bbkr.zeropoint.api;
 
+import com.gmail.zendarva.api.capabilities.ActionType;
+
 import net.minecraft.nbt.NBTTagCompound;
 
 public class EnergyStorage implements IEnergyStorage {

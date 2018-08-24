@@ -21,12 +21,9 @@ targetCompatibility = 1.8
 
 repositories {
     mavenCentral()
-    maven {
-        url 'https://www.dimdev.org/maven/'
-    }
-    ivy {
-        artifactPattern "http://asie.pl/javadeps/proto/[module]-[revision](-[classifier]).[ext]"
-    }
+    maven { url 'https://www.dimdev.org/maven/' }
+    ivy { artifactPattern "http://asie.pl/javadeps/proto/[module]-[revision](-[classifier]).[ext]" }
+    maven { url 'https://www.jitpack.io' }
 }
 
 dependencies {
@@ -34,6 +31,7 @@ dependencies {
     compile name: "Jankson", version: "0.0.3"
     compile name: "JanksonShadowed", version: "0.0.3"
     compile name: "ProtoCharset", version: "0.0.3-0817-deobf"
+    implementation 'com.github.zendarva:rift-capabilities:rc-1'
 }
 
 sourceSets {

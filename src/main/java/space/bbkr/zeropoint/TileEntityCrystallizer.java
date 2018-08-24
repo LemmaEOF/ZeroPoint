@@ -9,7 +9,6 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentTranslation;
-import space.bbkr.zeropoint.api.ActionType;
 import space.bbkr.zeropoint.api.EnergyStorage;
 import space.bbkr.zeropoint.api.IEnergyHandler;
 import space.bbkr.zeropoint.api.TransferDirection;

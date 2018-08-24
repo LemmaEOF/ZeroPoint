@@ -12,7 +12,7 @@ public class DisposableBattery {
         return new LinkedHashMap<>();
     }
 
-    public boolean isDisposableBattery(ItemStack stack) {
+    public static boolean isDisposableBattery(ItemStack stack) {
         return getBatteryTimes().containsKey(stack.getItem());
     }
 }
