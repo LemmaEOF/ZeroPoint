@@ -23,7 +23,7 @@ repositories {
     mavenCentral()
     maven { url 'https://www.dimdev.org/maven/' }
     ivy { artifactPattern "http://asie.pl/javadeps/proto/[module]-[revision](-[classifier]).[ext]" }
-    maven { url 'https://www.jitpack.io' }
+    maven { url 'http://theasylum.xyz:8080/archiva/repository/theasylum/' }
 }
 
 dependencies {
@@ -31,7 +31,7 @@ dependencies {
     compile name: "Jankson", version: "0.0.3"
     compile name: "JanksonShadowed", version: "0.0.3"
     compile name: "ProtoCharset", version: "0.0.3-0817-deobf"
-    implementation 'com.github.zendarva:rift-capabilities:rc-1'
+    compile 'com.gmail.zendarva:Capabilities:0.0.1-SNAPSHOT:dev'
 }
 
 sourceSets {

@@ -1,6 +1,9 @@
 package space.bbkr.zeropoint;
 
 import com.gmail.zendarva.api.capabilities.ActionType;
+import com.gmail.zendarva.api.capabilities.ICapability;
+import com.gmail.zendarva.api.capabilities.ICapabilityContext;
+import com.gmail.zendarva.api.capabilities.ICapabilityProvider;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntityFurnace;
@@ -16,10 +19,17 @@ import space.bbkr.zeropoint.api.TransferDirection;
 import space.bbkr.zeropoint.api.EnergyStorage;
 import space.bbkr.zeropoint.api.IEnergyHandler;
 
-public class TileEntityGenerator extends TileEntity implements IEnergyHandler, ITickable {
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Optional;
+
+public class TileEntityGenerator extends TileEntity implements ICapabilityProvider, ITickable {
     private EnergyStorage energy;
     private ItemStack stack;
     private int fuelTime;
+    private List<ICapability> proxiedCapabilities = new LinkedList<>();
 
     public TileEntityGenerator(TileEntityType<?> type) {
         super(type);
@@ -81,10 +91,10 @@ public class TileEntityGenerator extends TileEntity implements IEnergyHandler, I
         return this.energy;
     }
 
-    @Override
-    public boolean canTransfer(EnumFacing facing, TransferDirection direction) {
-        return direction == TransferDirection.MATCH;
-    }
+//    @Override
+//    public boolean canTransfer(EnumFacing facing, TransferDirection direction) {
+//        return direction == TransferDirection.MATCH;
+//    }
 
     @Override
     public void markDirty() {
@@ -117,4 +127,42 @@ public class TileEntityGenerator extends TileEntity implements IEnergyHandler, I
         return new SPacketUpdateTileEntity(getPos(), 0, getUpdateTag());
     }
 
+    @Nonnull
+    @Override
+    public Optional<? extends ICapability> queryCapability(ICapabilityContext context, Class<? extends ICapability> capability) {
+        Optional<ICapability> proxiedCap = proxiedCapabilities.stream().filter(f->f.matches(context)).findFirst();
+        if (proxiedCap.isPresent())
+            return proxiedCap;
+        if (capability == IEnergyHandler.class){
+            return Optional.of(energy);
+        }
+        return Optional.empty();
+    }
+
+    @Nullable
+    @Override
+    public ICapability getCapability(ICapabilityContext iCapabilityContext, Class<? extends ICapability> aClass) {
+        return null;
+    }
+
+    @Nonnull
+    @Override
+    public List<? extends ICapability> getCapabilities(ICapabilityContext iCapabilityContext, Class<? extends ICapability> aClass) {
+        return null;
+    }
+
+    @Override
+    public void addProxyCapability(ICapability iCapability) {
+
+    }
+
+    @Override
+    public void removeProxyCapability(ICapability iCapability) {
+
+    }
+
+    @Override
+    public void invalidateCapabilities() {
+
+    }
 }

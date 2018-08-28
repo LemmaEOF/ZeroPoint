@@ -1,8 +1,9 @@
 package space.bbkr.zeropoint.api;
 
+import com.gmail.zendarva.api.capabilities.ICapability;
 import net.minecraft.util.EnumFacing;
 
-public interface IEnergyHandler {
+public interface IEnergyHandler extends ICapability {
     /**
      * @param facing    The face energy is transferring across on your block
      * @param direction The direction energy is moving from your frame of reference
@@ -13,5 +14,5 @@ public interface IEnergyHandler {
     /**
      * @return the EnergyStorage for your block
      */
-    public EnergyStorage getEnergyStorage();
+    public IEnergyStorage getEnergyStorage();
 }

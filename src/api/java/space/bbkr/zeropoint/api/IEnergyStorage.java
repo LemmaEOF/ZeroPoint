@@ -1,8 +1,9 @@
 package space.bbkr.zeropoint.api;
 
 import com.gmail.zendarva.api.capabilities.ActionType;
+import com.gmail.zendarva.api.capabilities.ICapability;
 
-public interface IEnergyStorage {
+public interface IEnergyStorage extends ICapability {
 
     /**
      * @return The current amount of energy stored

@@ -2,6 +2,7 @@ package space.bbkr.zeropoint.api;
 
 import com.gmail.zendarva.api.capabilities.ActionType;
 
+import com.gmail.zendarva.api.capabilities.ICapabilityContext;
 import net.minecraft.nbt.NBTTagCompound;
 
 public class EnergyStorage implements IEnergyStorage {
@@ -65,13 +66,27 @@ public class EnergyStorage implements IEnergyStorage {
         return extract;
     }
 
-    public EnergyStorage readFromNBT(NBTTagCompound nbt) {
+    public void readFromNBT(NBTTagCompound nbt) {
         energy = nbt.getInteger("Energy");
-        return this;
     }
 
     public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
         nbt.setInteger("Energy", energy);
         return nbt;
+    }
+
+    @Override
+    public boolean matches(ICapabilityContext context) {
+        return context instanceof EnergyHandlerContext;
+    }
+
+    @Override
+    public boolean isValid() {
+        return false;
+    }
+
+    @Override
+    public void invalidate() {
+
     }
 }
